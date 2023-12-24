@@ -1,0 +1,17 @@
+.App {
+    height: 100%;
+}
+.scrollbar1::-webkit-scrollbar {
+    width: 5px;
+}
+
+.scrollbar1::-webkit-scrollbar-track {
+    border-radius: 8px;
+    background-color: #e7e7e7;
+    border: 1px solid #cacaca;
+}
+
+.scrollbar1::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background-color: #00b6ff;
+}
