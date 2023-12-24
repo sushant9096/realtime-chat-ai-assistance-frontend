@@ -200,8 +200,8 @@ function App() {
                   style={{fontWeight: 900}}
                   p={5}
                 >
-                  Experience the power our AI assistant:<br/>
-                  Just a click of 'Continue with Google' get started!!!!
+                  Experience the power of our AI assistant:<br/>
+                  Just a click on 'Continue with Google' to get started!!!!
                 </Typography>
                 <FirebaseUIContainer/>
               </Paper>
