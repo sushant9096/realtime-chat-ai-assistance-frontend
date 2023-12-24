@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import {Grid, IconButton, InputAdornment, Paper, Stack, TextField, Tooltip, Typography, useTheme} from "@mui/material";
 import {Cancel, ChatSharp, Refresh, Search, Send} from "@mui/icons-material";
 import ConversionTile from "./ConversionTile";
@@ -15,6 +15,7 @@ function ChatHome(props) {
     dialogOpen, toggleDialog,
     setDialogComponent
   } = props;
+  const scrollContainerRef = useRef(null);
   const [messages, setMessages] = React.useState([])
   const [conversations, setConversations] = React.useState([])
   const [conversionSearchTxt, setConversionSearchTxt] = React.useState('')
@@ -147,6 +148,12 @@ function ChatHome(props) {
     setSelectedConversationEmail(conversations[index]?.email);
   }
 
+  const scrollToBottom = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTop = scrollContainerRef.current.scrollHeight;
+    }
+  };
+
   React.useEffect(() => {
     if (!firstAPICall.current) {
       firstAPICall.current = true;
@@ -196,6 +203,9 @@ function ChatHome(props) {
           }
           return prevState;
         })
+        setTimeout(() => {
+          scrollToBottom();
+        },100)
       });
       const requestConfig = {
         url: '/message?conversationId=' + conversations[selectedConversation]?.conversationId,
@@ -249,7 +259,7 @@ function ChatHome(props) {
         component={Stack}
         direction={"column"}
       >
-        <TextField
+        {/*<TextField
           style={{
             marginBottom: 5,
           }}
@@ -268,7 +278,7 @@ function ChatHome(props) {
             </InputAdornment>
           }}
           fullWidth
-        />
+        />*/}
         <Stack
           direction="row"
           justifyContent={"space-between"}
@@ -377,6 +387,7 @@ function ChatHome(props) {
           {selectedConversationTitle}
         </Typography>
         <div
+          ref={scrollContainerRef}
           className={"scrollbar1"}
           style={{
             flexGrow: 1,
